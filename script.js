@@ -11,30 +11,20 @@ const lookup = {
 };
 
 function rot13(encodedStr){
-  // let decodedArr = []; // Your Result goes here
-  // Only change code below this line
-
-var arr = [];
-  for(var i = 0; i < str.length; i++){
-    var code = 0;
-    code = str.charCodeAt(i);
-    if(code < 65){
-      arr.push(String.fromCharCode(code));
-    } 
-	else{
-      code = code + 13;
-      if(code > 90){
-      code = code % 90 + 65 -1;
-      arr.push(String.fromCharCode(code));
-    }
-      else{
-      arr.push(String.fromCharCode(code));
-    }
-   }
-}
-  return arr.join("");
-}
-  //return ;//return decodedArr
+  let decodedArr = []; // Your Result goes here
+  var re = new RegExp("[a-z]", "i");
+  var min = 'A'.charCodeAt(0);
+  var max = 'Z'.charCodeAt(0);
+  var factor = 13;
+  var result = "";
+  str = str.toUpperCase();
+  
+  for (var i=0; i<str.length; i++) {
+    result += (re.test(str[i]) ?
+      String.fromCharCode((str.charCodeAt(i) - min + factor) % (max-min+1) + min) : str[i]);
+  }
+  
+  return result;
 
 
-module.exports = rot13;
+//module.exports = rot13;
